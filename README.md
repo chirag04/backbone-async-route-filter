@@ -60,6 +60,9 @@ var Router = Backbone.Router.extend({
 });
 ```
 
+## CONTRIBUTORS
+  [Srinivas Iyer](https://github.com/srinivasiyer)
+
 ## LICENSE
 
 MIT

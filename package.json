@@ -1,0 +1,23 @@
+{
+    "name": "backbone-async-route-filters",
+    "version": "0.1.0",
+    "description": "async before and after filters for backbone routes",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/chirag04/backbone-async-route-filters"
+    },
+    "homepage": "https://github.com/chirag04/backbone-async-route-filters",
+    "keywords": [
+        "bacbkone",
+        "async filters",
+        "route-filters",
+        "before filter",
+        "after filter"
+    ],
+    "author": {
+        "name": "Chirag Jain",
+        "email": "jain_chirag04@yahoo.com",
+        "url": "http://chiragjain.tumblr.com"
+    },
+    "license": "MIT"
+}

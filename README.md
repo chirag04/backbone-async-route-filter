@@ -55,8 +55,57 @@ var Router = Backbone.Router.extend({
         //redirect to signin page.
       }
     });
-
   }
+});
+```
+
+In order to use the AMD file
+
+```js
+require(['path/to/backbone-route-filter-amd'], function(Router){
+  var router = Router.extend({
+    routes: {
+      'users': 'usersList',
+      'users/:id': 'userShow',
+      'account/sign-in': 'signIn'
+    },
+
+    before: {
+      // Using instance methods
+      'users(:/id)': 'checkAuthorization',
+
+      // Using inline filter definition
+      '*any': function(fragment, args, next) {
+        console.log('Atempting to load ' + fragment + ' with arguments: ', args);
+        next();
+      }
+    },
+
+    after: {
+      // Google analytics tracking
+      // After filter will be triggered only if all before filters passed and action was triggered,
+      // so you'll only track pages that was displayed to user
+      '*any': function(fragment, args, next) {
+        goog._trackPageview(fragment);
+        next();
+      }
+    },
+
+    checkAuthorization: function(fragment, args, next) {
+      
+      //make ajax to check authorization here.
+      $.ajax({
+        data: somedata,
+        success: function() {
+          // if logged in execute next() to move ahead.
+          next();
+        },
+        error: function() {
+          //redirect to signin page.
+        }
+      });
+    }
+  }) 
 });
 ```
 

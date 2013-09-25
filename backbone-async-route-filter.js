@@ -62,6 +62,8 @@
           }
         }
 
+        // reset the stack coutner for before filters
+        index = 0;
         // start with top of the before stack
         next(beforeStack, true);
         

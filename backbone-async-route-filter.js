@@ -36,7 +36,7 @@
       // store all the before and after routes in a stack
       var beforeStack = [];
       var afterStack = [];
-      var index = 0;
+
       _.each(router.before, function(value,key) {
         beforeStack.push({'filter':key, 'filterFn':value});
       });
@@ -46,9 +46,12 @@
 
       Backbone.history.route(route, function(fragment) {
         var args = router._extractParameters(route, fragment);
-        
+
+        var beforeStackClone = _.clone(beforeStack);
+        var afterStackClone = _.clone(afterStack);
+
         function next(stack, runRoute) {
-          var layer = stack[index++];
+          var layer = stack.shift();
           if(layer) {
             var filter = _.isRegExp(layer.filter) ? layer.filter : router._routeToRegExp(layer.filter);
             if(filter.test(fragment)) {
@@ -62,18 +65,14 @@
           }
         }
 
-        // reset the stack coutner for before filters
-        index = 0;
         // start with top of the before stack
-        next(beforeStack, true);
+        next(beforeStackClone, true);
         
         router.trigger.apply(router, ['route:' + name].concat(args));
         router.trigger('route', name, args);
         Backbone.history.trigger('route', router, name, args);
         
-        // reset the stack coutner for after filters
-        index = 0;
-        next(afterStack);
+        next(afterStackClone);
 
       });
 

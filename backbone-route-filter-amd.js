@@ -60,7 +60,7 @@ define(['backbone'], function(Backbone){
                             next(stack, runRoute);
                         }
                     } else if(runRoute) {
-                        callback.apply(router, args);
+                        router.execute(callback, args);
                     }
                 }
 
@@ -69,7 +69,6 @@ define(['backbone'], function(Backbone){
                 // start with top of the before stack
                 next(beforeStack, true);
 
-                router.execute(callback, args);
                 router.trigger.apply(router, ['route:' + name].concat(args));
                 router.trigger('route', name, args);
                 Backbone.history.trigger('route', router, name, args);

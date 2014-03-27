@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Willyham/backbone-async-route-filter.git"
+    "url": "git://github.com/chirag04/backbone-async-route-filter.git"
   },
   "dependencies": {
     "backbone": "~1.1.2"

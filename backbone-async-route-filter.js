@@ -66,7 +66,8 @@
         index = 0;
         // start with top of the before stack
         next(beforeStack, true);
-        
+
+        router.execute(callback, args);
         router.trigger.apply(router, ['route:' + name].concat(args));
         router.trigger('route', name, args);
         Backbone.history.trigger('route', router, name, args);
